@@ -1,36 +1,45 @@
 <template>
   <div class="carousel carousel-center p-4 space-x-4 bg-neutral rounded-box max-w-[800px] max-h-[400px]">
-    <template v-for="(imageUrl, index) in props.imageUrls" :key="imageUrl">
-      <div :id="`item${index}`" class="carousel-item relative w-full">
-        <img  :src="imageUrl" class="w-full object-cover rounded-box" />
-        <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-          <a :href="getPrevId(index)" class="btn btn-sm btn-ghost btn-circle">❮</a> 
-          <a :href="getNextId(index)" class="btn btn-sm btn-ghost btn-circle">❯</a>
-        </div>
-      </div>
-    </template>
+    <CarouselItem
+      v-for="(imageUrl, index) in props.imageUrls"
+      :key="imageUrl"
+      :model-value="imageUrl"
+      :index="index"
+      :length="props.imageUrls.length"
+      ref="items"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
+import { Ref, onMounted, onUnmounted, ref } from 'vue';
+import CarouselItem from './CarouselItem.vue';
+
+let intervalID: number | null;
+const items: Ref<any[]> = ref([]);
+const index: Ref<number> = ref(0);
+
 const props = defineProps<{
-    imageUrls: string[]
+    imageUrls: string[],
+    autoScroll: boolean,
 }>();
 
-function getPrevId(index: number): string {
-  let prevIndex = index - 1;
-  if (prevIndex < 0) {
-    prevIndex = props.imageUrls.length - 1;
+onMounted(() => {
+  if (props.autoScroll) {
+    intervalID = setInterval(() => {
+      let newIndex = index.value + 1;
+      if (newIndex === props.imageUrls.length) {
+        newIndex = 0;
+      }
+      items.value[newIndex].clickNext();
+      index.value = newIndex;
+    }, 3_000);
   }
-  return `#item${prevIndex}`;
-}
+});
 
-function getNextId(index: number): string {
-  let nextIndex = index + 1;
-  if (nextIndex >= props.imageUrls.length) {
-    nextIndex = 0;
+onUnmounted(() => {
+  if (intervalID) {
+    clearInterval(intervalID);
   }
-  return `#item${nextIndex}`;
-}
-
+})
 </script>

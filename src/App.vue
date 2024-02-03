@@ -4,7 +4,7 @@
       Late Night Woodworking
     </h1>
 
-    <Carousel :imageUrls="imageUrls" />
+    <Carousel :image-urls="imageUrls" :auto-scroll="true" />
   
     <div>
       <a href="https://www.youtube.com/@LateNightWoodworking" target="_blank" class="btn btn-primary">
