@@ -11,7 +11,7 @@ import CarouselItem from './CarouselItem.vue';
 
 let intervalID: number | null;
 const items: Ref<any[]> = ref([]);
-const index: Ref<number> = ref(0);
+// const index: Ref<number> = ref(0);
 
 const props = defineProps<{
   imageUrls: string[],

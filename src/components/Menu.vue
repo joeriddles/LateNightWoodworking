@@ -20,8 +20,9 @@
 <script setup lang="ts">
 import img from "../assets/logo_small.png"
 
-defineProps<{
+withDefaults(defineProps<{
   transparent: boolean,
-}>();
-
+}>(), {
+  transparent: false,
+});
 </script>
