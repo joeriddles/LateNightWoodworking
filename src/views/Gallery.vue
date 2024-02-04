@@ -1,4 +1,6 @@
 <template>
+  <Menu></Menu>
+
   <div class="w-full text-center space-y-3">
     <Carousel :image-urls="imageUrls" :auto-scroll="true" />
     <div>
@@ -12,6 +14,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import Carousel from '../components/Carousel.vue';
+import Menu from "../components/Menu.vue"
 
 const imageUrls = ref([
   new URL('../assets/RH-4.jpg', import.meta.url).href,
