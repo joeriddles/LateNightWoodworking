@@ -18,7 +18,7 @@
 <script setup lang="ts">
 import Menu from "../components/Menu.vue"
 
-const mainImg = new URL('../assets/RH-4.jpg', import.meta.url).href
+const mainImg = new URL('../assets/wall_small.jpg', import.meta.url).href
 
 const secondaryImg1 = new URL('../assets/RH-6.jpg', import.meta.url).href
 const secondaryImg2 = new URL('../assets/RH-8.jpg', import.meta.url).href
